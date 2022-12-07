@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание нового пользователя</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!--  Перенес тег style  -->
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+        text,label,a {
+            font-size: 100%;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            color: #223c45;
+        }
+        h2,h3,title{
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            color: #223c45;
+        }
+        .table_blur {
+            background: #f5ffff;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .table_blur th {
+            border-top: 1px solid #777777;
+            border-bottom: 1px solid #777777;
+            box-shadow: inset 0 1px 0 #999999, inset 0 -1px 0 #999999;
+            background: linear-gradient(#9595b6, #5a567f);
+            color: white;
+            padding: 10px 5px;
+            position: relative;
+        }
+        .table_blur th:after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 25%;
+            height: 25%;
+            width: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0), rgba(255,255,255,.08));
+        }
+        .table_blur tr:nth-child(odd) {
+            background: #ebf3f9;
+        }
+        .table_blur th:first-child {
+            border-left: 1px solid #777777;
+            border-bottom:  1px solid #777777;
+            box-shadow: inset 1px 1px 0 #999999, inset 0 -1px 0 #999999;
+        }
+        .table_blur th:last-child {
+            border-right: 1px solid #777777;
+            border-bottom:  1px solid #777777;
+            box-shadow: inset -1px 1px 0 #999999, inset 0 -1px 0 #999999;
+        }
+        .table_blur td {
+            border: 1px solid #e3eef7;
+            padding: 10px 5px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+<form action="#" th:action="@{/users/create-user/}" th:object="${user}" method="post" id="confirmation"	>
+    <table height="90"><tr><td style="margin-top: 50px"><h3>Создание нового пользователя</h3></td></tr></table>
+    <table>
+        <tr>
+            <td><label for="firstName">Фамилия</label></td>
+            <td><input type="text" th:field="*{firstName}" id="firstName" placeholder = "First name"></td>
+        </tr>
+        <tr>
+            <td><label for="secondName">Имя</label></td>
+            <td><input type="text" th:field="*{secondName}" id="secondName" placeholder="Last name"></td>
+        </tr>
+        <tr>
+            <td><label for="thirdName">Отчество</label></td>
+            <td><input type="text" th:field="*{thirdName}" id="thirdName" placeholder = "Patronimic name"></td>
+        </tr>
+        <tr>
+            <td><label for="login">Логин</label></td>
+            <td><input type="text" th:field="*{login}" id="login" placeholder = "Login name"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Пароль</label></td>
+            <td><input type="password" th:field="*{password}" id="password" placeholder = "Password"></td>
+        </tr>
+        <tr>
+            <td><label for="email">E-mail адрес</label></td>
+            <td><input type="email" th:field="*{email}" id="email" placeholder = "E-nail address"></td>
+        </tr>
+        <tr>
+            <td><label for="usersRoles">Роли пользователя</label></td>
+            <td><input type="text" th:field="*{usersRoles}" id="usersRoles" placeholder = "Users roles"></td>
+        </tr>
+<!--        <tr><td><input readonly type="hidden" th:value="${token}" id="token" name = "token"/></td></tr>-->
+<!--        <tr><td><input readonly type="hidden" th:value="${userNameUrl}" id="userNameUrl" name = "userNameUrl"/></td></tr>-->
+    </table>
+    <input type="submit" value="Создать пользователя" onclick="formConfirmation(event)">
+
+</form>
+<p><a th:href="@{/users/}">Назад к списоку Пользователей</a> </p>
+<!--<div class="menu-container">-->
+<!--    <div class="menu-button-container">-->
+<!--        <button onclick="toggleMenu()">МЕНЮ</button>-->
+<!--    </div>-->
+<!--    <div class="menu-wrapper" style="display: none">-->
+<!--        <ul>-->
+<!--            <li><a th:href="@{/auth/line-create/{id}(id=${token}+'/'+${userName})}">Создать статью затрат</a></li>-->
+<!--            <li><a th:href="@{/auth/charges/{id}(id=${token}+'/'+${userName})}">Посмотреть все оплаты</a></li>-->
+<!--            <li><a th:href="@{/auth/registries/{id}(id=${token}+'/'+${userName})}">Посмотреть реестры</a></li>-->
+<!--            <li><a th:href="@{/auth/companies/{id}(id=${token}+'/'+${userName} )}">Выбор компании</a></li>-->
+<!--            <li><a th:href="@{/auth/adm/users/{id}(id=${token}+'/'+${userName} )}">Список пользователей</a></li>-->
+<!--            <li><a th:href="@{/auth/categories/{id}(id=${token}+'/'+${userName} )}">Список Категорий Затрат</a></li>-->
+<!--            <li><a th:href="@{/auth/set-limit/{id}(id=${token}+'/'+${userName} )}">Установить лимит подтверждения реестра директором</a></li>-->
+<!--            <li><a th:href="@{/auth/adm/companies/{id}(id=${token}+'/'+${userName})}">Список компаний</a></li>-->
+<!--            <li><a th:href="@{/auth/adm/copy-year/{id}(id=${token}+'/'+${userName})}">Копировать год в следующий</a></li>-->
+<!--            <li><a th:href="@{/auth/adm/copy-lines/{id}(id=${token}+'/'+${userName})}">Копировать статьи затрат в другую организацию</a></li>-->
+<!--            <li><a th:href="@{/auth/lines/{id}(id=${token}+'/'+${userName})}">Назад к строкам</a></li>-->
+<!--            <li class="bold-text"><a class="red-text" href="/logout">Выход</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+
+<style>
+    /* Стили для меню */
+    .menu-button-container button {
+        height: 40px;
+        font-weight: 600;
+    }
+    .menu-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        opacity: .8;
+        transition: .3s;
+        z-index: 10;
+    }
+    .menu-container:hover {
+        opacity: 1;
+    }
+    .menu-wrapper {
+        position: relative;
+    }
+    .menu-wrapper ul {
+        position: absolute;
+        border-radius: 8px;
+        background: #fff;
+        padding: 13px;
+        min-width: 300px;
+        -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        margin-top: 0px;
+    }
+    .menu-wrapper ul li a:hover {
+        text-decoration: underline;
+    }
+    .menu-wrapper ul li a {
+        text-decoration: none;
+    }
+    .menu-wrapper ul li:not(:last-of-type) {
+        margin-bottom: 8px;
+    }
+    .red-text {
+        color: red;
+    }
+    .bold-text {
+        font-weight: bold;
+    }
+    /* Стили для блюра */
+    .blured {
+        color: transparent;
+        text-shadow: 0 0 3px #a09f9d;
+    }
+    .unblured_row {
+        color: #444444;
+        text-shadow: none;
+    }
+    /*  Стили для прилепающего хедера  */
+    .table_blur thead {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+    }
+</style>
+<script>
+    /* Скрипты для меню */
+    let menu = document.querySelector(".menu-wrapper");
+
+    function toggleMenu() {
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+    /* Скрипты на блюр */
+    let table = document.querySelector(".table_blur");
+
+    function blurRows(e) {
+        e.target.parentNode.classList.add("unblured_row");
+        table.classList.add("blured")
+    }
+
+    function unblurRows(e) {
+        e.target.parentNode.classList.remove("unblured_row");
+        table.classList.remove("blured");
+    }
+    /* Подтверждение на отправку формы */
+    let form = document.querySelector("#confirmation");
+    function formConfirmation(e) {
+        e.preventDefault();
+        if (window.confirm("Вы действительно хотите создать нового пользователя?")) {
+            // console.log(form);
+            form.submit();
+        }
+    }
+</script>
+</body>
+</html>
