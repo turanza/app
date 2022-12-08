@@ -38,7 +38,7 @@ public class JwtUser implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
-        this.enabled = true;
+        this.enabled = true;//need to take status from table
         this.lastPasswordResetDate = lastPasswordResetDate;
         // this.lastPasswordResetDate = null;
     }

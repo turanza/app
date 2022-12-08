@@ -3,6 +3,8 @@ package com.vocabulary.app.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,4 +34,12 @@ public class User extends BaseEntity    {
 
     @Column (name = "users_roles")
     private String usersRoles;
+
+    public List<Role> getRolesList (String usersRoles){
+        List <Role> roleList = new ArrayList<>();
+        Role role = new Role();
+        role.setName(usersRoles);
+        roleList.add(role);
+        return roleList;
+    }
 }

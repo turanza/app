@@ -24,10 +24,13 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @GetMapping("/users")
-    public String findAll(Model model){
+    @GetMapping("/users/{token}/{userName}")
+    public String findAll(Model model, @PathVariable("token") String token,
+                          @PathVariable("userName")String userName){
         List<User> userList = userService.findAll();
         model.addAttribute("users",userList);
+        model.addAttribute("token",token);
+        model.addAttribute("userName",userName);
         return "user-list";
     }
 

@@ -32,17 +32,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .formLogin()
-//                .loginPage("/")
-                .successForwardUrl("/users")
+                .sessionManagement().invalidSessionUrl("/login")
+                .sessionAuthenticationErrorUrl("/login")
+                .and()
 
+                .formLogin()
+                .loginPage("/login")
+                .successForwardUrl("/auth/users/{token}/{userName}")
+                .permitAll().loginProcessingUrl("/auth/users/{token}/{userName}")
                 .and()
                 .logout()
 
                 .deleteCookies("remove")
-//                .permitAll()
+                .permitAll()
                 .and()
-//                .authorizeRequests()
+                .authorizeRequests()
+                .antMatchers("/auth/**").hasAnyAuthority("ADMIN","USER")
+                .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
     }
 }

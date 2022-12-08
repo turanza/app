@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<style>
+    text,label,a {
+        font-size: 100%;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        color: #223c45;
+    }
+    h2{
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        color: #223c45;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Добро Пожаловать</title>
+</head>
+<body>
+<form action="#" th:action="@{/login}" th:object="${authenticationRequestDto}" method="post">
+    <table>
+        <tr>
+            <td><h2>Введите Логин и Пароль</h2></td>
+        </tr>
+        <tr>
+            <td><label for="username">Логин</label></td>
+            <td><input type="text" th:field="*{username}" id="username" placeholder="username"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Пароль</label></td>
+            <td><input type="password" th:field="*{password}" id="password" placeholder="password"></td>
+        </tr>
+        <tr>
+            <td><label hidden for="token">токен</label></td>
+        </tr>
+        <tr>
+            <td><input hidden readonly type="text" th:field="*{token}" id="token" placeholder="token"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Войти"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
