@@ -24,7 +24,7 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @GetMapping("/users/{token}/{userName}")
+    @GetMapping("/auth/users/{token}/{userName}")
     public String findAll(Model model, @PathVariable("token") String token,
                           @PathVariable("userName")String userName){
         List<User> userList = userService.findAll();

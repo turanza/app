@@ -14,6 +14,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
 
+    private static final String AUTH = "/auth/**";
+
+    private static final String LOGIN_PAGE = "/login";
+
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
@@ -47,7 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").hasAnyAuthority("ADMIN","USER")
+//                .antMatchers("/auth/**").hasAnyAuthority("ADMIN","USER")
+//                .and()
+                .antMatchers(LOGIN_PAGE).permitAll()
+                .antMatchers(AUTH).hasAnyAuthority("ADMIN","USER")
+                .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
     }
