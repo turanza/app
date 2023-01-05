@@ -100,7 +100,7 @@
 <!--                        </tr>-->
 <!--                    </table>-->
                 </td>
-                <td><a th:href="@{/users/update-user/{id}(id=${us.id})}">Изменить</a> </td>
+                <td><a th:href="@{/users/update-user/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}">Изменить</a> </td>
 <!--                <td><a th:href="@{/auth/adm/user-update-role/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}">Изменить роли</a> </td>-->
 <!--                <td><a th:href="@{/auth/adm/user-update-company/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}">Изменить компании</a> </td>-->
 <!--                <td><a th:href="@{/auth/adm/user-delete/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}" onclick="confirmation(event)">Удалить</a> </td>-->
@@ -108,8 +108,8 @@
             </tbody>
         </table>
     </div>
-    <p><a th:href="@{/users/create-user}">Создать нового пользователя</a> </p>
-<!--    <p><a th:href="@{/auth/lines/{id}(id=${token}+'/'+${userName})}">Назад к строкам</a></p>-->
+    <p><a th:href="@{/users/create-user/{id}(id=${token}+'/'+${userName})}">Создать нового пользователя</a> </p>
+    <p><a th:href="@{/auth/menu/{id}(id=${token}+'/'+${userName})}">Назад в меню</a></p>
 </div>
 <!--<div class="menu-container">-->
 <!--    <div class="menu-button-container">-->

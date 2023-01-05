@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-<form action="#" th:action="@{/users/update-user/}" th:object="${user}" method="post" id="confirmation"	>
+<form action="#" th:action="@{/users/update-user/{id}(id=${token}+'/'+${userName})}" th:object="${user}" method="post" id="confirmation"	>
     <table height="90"><tr><td style="margin-top: 50px"><h3>Изменение пользователя</h3></td></tr></table>
     <table>
         <tr>
@@ -108,7 +108,7 @@
     </table>
     <input type="submit" value="Сохранить изменения" onclick="formConfirmation(event)">
 </form>
-<p><a th:href="@{/users}">Назад</a> </p>
+<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">Назад</a> </p>
 <!--<div class="menu-container">-->
 <!--    <div class="menu-button-container">-->
 <!--        <button onclick="toggleMenu()">МЕНЮ</button>-->

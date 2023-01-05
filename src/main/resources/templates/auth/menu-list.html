@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">К списоку Пользователей</a> </p>
+<p><a th:href="@{/auth/word-list/{id}(id=${token}+'/'+${userName})}">Список слов</a> </p>
+<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">Начать изучение</a> </p>
+
+</body>
+</html>

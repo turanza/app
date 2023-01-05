@@ -63,7 +63,8 @@ public class AuthentificationController {
             model.addAttribute("requestDto",requestDto);
             model.addAttribute("token",token);
 //            return ResponseEntity.ok(response);
-            String temp ="redirect:/auth/users/";
+//            String temp ="redirect:/auth/users/";
+            String temp ="redirect:/auth/menu/";
             temp+=token;
             temp+="/";
             temp+=username;

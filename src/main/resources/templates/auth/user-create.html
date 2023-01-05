@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-<form action="#" th:action="@{/users/create-user/}" th:object="${user}" method="post" id="confirmation"	>
+<form action="#" th:action="@{/users/create-user/{id}(id=${token}+'/'+${userName})}" th:object="${user}" method="post" id="confirmation"	>
     <table height="90"><tr><td style="margin-top: 50px"><h3>Создание нового пользователя</h3></td></tr></table>
     <table>
         <tr>
@@ -103,7 +103,7 @@
     <input type="submit" value="Создать пользователя" onclick="formConfirmation(event)">
 
 </form>
-<p><a th:href="@{/users/}">Назад к списоку Пользователей</a> </p>
+<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">Назад к списоку Пользователей</a> </p>
 <!--<div class="menu-container">-->
 <!--    <div class="menu-button-container">-->
 <!--        <button onclick="toggleMenu()">МЕНЮ</button>-->
