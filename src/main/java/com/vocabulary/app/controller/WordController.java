@@ -1,5 +1,6 @@
 package com.vocabulary.app.controller;
 
+import com.vocabulary.app.dto.WordCreateDto;
 import com.vocabulary.app.model.Word;
 import com.vocabulary.app.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,27 @@ public class WordController {
         return "auth/word-update";
     }
 
-    @PostMapping("/word/word-update/{token}/{id}")
+    @PostMapping("/word/word-update/{token}/{userName}")
     public String updateWordForm (Word word, @PathVariable("token")String token,
                                   @PathVariable("userName")String userName){
         wordService.updateWord(word);
 
-        return "redirect:auth/word-list/"+token+"/"+userName;
+        return "redirect:/auth/word-list/"+token+"/"+userName;
     }
 
+    @GetMapping("/word/word-create/{token}/{userName}")
+    public String createWord(Model model,Word word, @PathVariable("token")String token,
+                             @PathVariable("userName")String userName){
+        model.addAttribute("token", token);
+        model.addAttribute("userName", userName);
+        return "auth/word-create";
+    }
 
+    @PostMapping("/word/word-create/{token}/{userName}")
+    public String createWordForm(WordCreateDto word, @PathVariable("token") String token,
+                                 @PathVariable("userName") String userName){
+        wordService.saveWord(word.toWord());
+        return "redirect:/auth/word-list/"+token+"/"+userName;
+
+    }
 }

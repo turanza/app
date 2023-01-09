@@ -1,22 +1,8 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<p>Здесь будет список слов</p>-->
-<!--<p><a th:href="@{/auth/menu/{id}(id=${token}+'/'+${userName})}">Назад в меню</a> </p>-->
-
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Words</title>
+    <title>Создание нового слова</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -80,53 +66,44 @@
     </style>
 </head>
 <body>
+<form action="#" th:action="@{/word/word-create/{id}(id=${token}+'/'+${userName})}" th:object="${word}" method="post" id="confirmation"	>
+    <table height="90"><tr><td style="margin-top: 50px"><h3>Создание нового слова</h3></td></tr></table>
+    <table>
+        <tr>
+            <td><label for="wordF">Слово</label></td>
+            <td><input type="text" th:field="*{wordF}" id="wordF" placeholder = "Слово"></td>
+        </tr>
+        <tr>
+            <td><label for="wordR">Перевод</label></td>
+            <td><input type="text" th:field="*{wordR}" id="wordR" placeholder="Перевод"></td>
+        </tr>
+        <tr>
+            <td><label for="exampleF">Пример</label></td>
+            <td><input type="text" th:field="*{exampleF}" id="exampleF" placeholder = "Пример"></td>
+        </tr>
+        <tr>
+            <td><label for="exampleR">Перевод примера</label></td>
+            <td><input type="text" th:field="*{exampleR}" id="exampleR" placeholder = "Перевод примера"></td>
+        </tr>
+        <tr>
+            <td><label for="active">Активно</label></td>
+            <td><input type="text" th:field="*{active}" id="active" placeholder = "Активно"></td>
+        </tr>
+        <tr>
+            <td><label for="language">Язык</label></td>
+            <td><input type="text" th:field="*{language}" id="language" placeholder = "Язык"></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td><label for="usersRoles">Роли пользователя</label></td>-->
+<!--            <td><input type="text" th:field="*{usersRoles}" id="usersRoles" placeholder = "Users roles"></td>-->
+<!--        </tr>-->
+        <!--        <tr><td><input readonly type="hidden" th:value="${token}" id="token" name = "token"/></td></tr>-->
+        <!--        <tr><td><input readonly type="hidden" th:value="${userNameUrl}" id="userNameUrl" name = "userNameUrl"/></td></tr>-->
+    </table>
+    <input type="submit" value="Создать слово" onclick="formConfirmation(event)">
 
-<table width="100%" ><tr><td valign="top" align="right"><a href="/logout">Выход</a> </td></tr></table>
-<div th:switch="${words}">
-    <h2 th:case ="null">No words found</h2>
-    <div th:case="*">
-        <table ><tr><td style="margin-top: 50px"><h2>Список слов</h2></td></tr></table>
-        <table class="table_blur">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Слово</th>
-                <th>Перевод</th>
-                <th>Пример</th>
-                <th>Перевод примера</th>
-                <th>Картинка</th>
-                <th>Активно</th>
-                <th>Язык</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="word : ${words}">
-                <td th:text="${word.id}"></td>
-                <td th:text="${word.wordF}" class="hover-trigger" onmouseover="blurRows(event)" onmouseout="unblurRows(event)"></td>
-                <td th:text="${word.wordR}"></td>
-                <td th:text="${word.exampleF}"></td>
-                <td th:text="${word.exampleR}"></td>
-<!--                <td th:text="${word.picure}"></td>-->
-                <td th:text="${word.active}"></td>
-                <td th:text="${word.active}"></td>
-                <td th:text="${word.language}"></td>
-
-
-                <!--                        </tr>-->
-                <!--                    </table>-->
-                </td>
-                <td><a th:href="@{/word/word-update/{id}(id=${word.id}+'/'+${token}+'/'+${userName})}">Изменить</a> </td>
-                <!--                <td><a th:href="@{/auth/adm/user-update-role/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}">Изменить роли</a> </td>-->
-                <!--                <td><a th:href="@{/auth/adm/user-update-company/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}">Изменить компании</a> </td>-->
-                <!--                <td><a th:href="@{/auth/adm/user-delete/{id}(id=${us.id}+'/'+${token}+'/'+${userName})}" onclick="confirmation(event)">Удалить</a> </td>-->
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <p><a th:href="@{/word/word-create/{id}(id=${token}+'/'+${userName})}">Создать новое слово</a> </p>
-    <p><a th:href="@{/auth/menu/{id}(id=${token}+'/'+${userName})}">Назад в меню</a></p>
-</div>
+</form>
+<p><a th:href="@{/auth/word-list/{id}(id=${token}+'/'+${userName})}">Назад к списоку слов</a> </p>
 <!--<div class="menu-container">-->
 <!--    <div class="menu-button-container">-->
 <!--        <button onclick="toggleMenu()">МЕНЮ</button>-->
@@ -234,11 +211,13 @@
         e.target.parentNode.classList.remove("unblured_row");
         table.classList.remove("blured");
     }
-    /*скрипт вызова алерта по клику на ссылку*/
-    function confirmation(e) {
+    /* Подтверждение на отправку формы */
+    let form = document.querySelector("#confirmation");
+    function formConfirmation(e) {
         e.preventDefault();
-        if (window.confirm("Вы действительно хотите удалить пользователя?")) {
-            window.location = e.target.href;
+        if (window.confirm("Вы действительно хотите создать нового пользователя?")) {
+            // console.log(form);
+            form.submit();
         }
     }
 </script>
