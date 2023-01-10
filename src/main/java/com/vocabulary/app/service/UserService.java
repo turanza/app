@@ -45,4 +45,8 @@ private final UserRepository userRepository;
                 user.getSecondName(),user.getThirdName(),user.getEmail(),user.getLogin(),
                 user.getUsersRoles());
     }
+
+    public Long getUsersId(String userName) {
+        return userRepository.getByUserName(userName);
+    }
 }

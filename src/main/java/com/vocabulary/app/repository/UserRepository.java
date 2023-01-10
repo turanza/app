@@ -23,4 +23,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
      email=:email,users_roles=:usersRoles WHERE id=:id
 """,nativeQuery = true)
     void updateUserWithOutPass(Long id, String firstName, String secondName, String thirdName, String email, String login, String usersRoles);
+
+    @Query(value = """
+    SELECT id FROM users WHERE login=:userName
+""",nativeQuery = true)
+    Long getByUserName(String userName);
 }

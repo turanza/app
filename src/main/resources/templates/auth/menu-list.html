@@ -7,7 +7,8 @@
 <body>
 <p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">К списоку Пользователей</a> </p>
 <p><a th:href="@{/auth/word-list/{id}(id=${token}+'/'+${userName})}">Список слов</a> </p>
-<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">Начать изучение</a> </p>
+<!--<p><a th:href="@{/auth/users/{id}(id=${token}+'/'+${userName})}">Начать изучение</a> </p>-->
+<p><a th:href="@{/study/process/{id}(id=${token}+'/'+${userName})}">Начать изучение</a> </p>
 
 </body>
 </html>
